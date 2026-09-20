@@ -379,6 +379,40 @@ textarea[aria-invalid='true'] {
   font-size: 1.05rem;
 }
 
+.places {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.place {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--line);
+  background: #f7fbfa;
+}
+
+.place-where {
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.place-mariana {
+  background: #f3f0ea;
+}
+
+.place-elena {
+  background: #eef6f4;
+}
+
+.place-diego {
+  background: #eef3f8;
+}
+
 .night-scene {
   position: relative;
   overflow: hidden;

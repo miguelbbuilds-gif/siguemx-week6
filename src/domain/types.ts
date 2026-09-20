@@ -16,7 +16,7 @@ export type FamilyPlan = {
   members: FamilyMember[]
 }
 
-export type Screen = 'welcome' | 'setup' | 'ready' | 'act'
+export type Screen = 'welcome' | 'setup' | 'ready' | 'act' | 'coordinate'
 
 export type ActChoiceId = 'help-elena' | 'wait-mariana' | 'move-self'
 
@@ -31,5 +31,28 @@ export type ActRecord = {
   label: string
   responseMs: number
   assumesElenaWithoutPrompt: boolean
+  finding: string
+}
+
+export type CoordinateChoiceId = 'follow-plan' | 'wait-mariana' | 'diego-to-elena'
+
+export type CoordinateChoice = {
+  id: CoordinateChoiceId
+  label: string
+  reliesOnMariana: boolean
+}
+
+export type PlanSignals = {
+  waitsForMariana: boolean
+  diegoHelpsElena: boolean
+  diegoActsIfMarianaAbsent: boolean
+}
+
+export type CoordinateRecord = {
+  choiceId: CoordinateChoiceId
+  label: string
+  responseMs: number
+  reliesOnMariana: boolean
+  matchesPlan: boolean
   finding: string
 }

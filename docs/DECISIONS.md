@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: ACT rehearsal implemented. COORDINATE, ADAPT, voice, and adaptive logic are still not implemented.
+Scope: COORDINATE rehearsal implemented. ADAPT, voice, and adaptive logic are still not implemented.
 
 ## Why this folder is a new project
 
@@ -60,9 +60,9 @@ The Week 6 packet is complete:
 
 ## Remaining work
 
-- COORDINATE, ADAPT, voice input, and adaptive logic — not started
+- ADAPT, voice input, and adaptive logic — not started
 - Further commits and two deployments — still required later
-- Mechanical and persona tests — after the remaining modes exist
+- Mechanical and persona tests — after ADAPT exists
 
 ## Phone-first foundation — 20 September 2026
 
@@ -80,12 +80,22 @@ ACT is a night earthquake decision for the synthetic household. The prompt does 
 
 COORDINATE, ADAPT, voice input, and the adaptive repeat loop are still not implemented. “Make another ACT decision” repeats the same ACT screen; it is not the adaptive modified scenario.
 
+## COORDINATE rehearsal — 20 September 2026
+
+COORDINATE places the synthetic family apart: Mariana at work (unreachable), Elena at home, Diego at school. One decision tests whether they follow the saved plan without the coordinator. Options: follow the plan now, wait for Mariana, or send Diego to Elena even if that is not the plan.
+
+The finding compares the choice with the actual setup text (keyword signals on responsibilities). Default Diego text (“do not wait only for Mariana”) treats waiting as a mismatch and following the plan as a match. No preparedness or survival score.
+
+**Limitations:** Plan comparison is English keyword matching, not a full language model. Locations are a CSS map, not Three.js. Repeating COORDINATE is the same scenario, not the adaptive loop.
+
+ACT, welcome, STOP, and family setup are unchanged in behavior.
+
 ## Remaining work
 
-- COORDINATE, ADAPT, voice input, and adaptive logic — not started
-- Mechanical and persona tests — after those modes exist
+- ADAPT, voice input, and adaptive logic — not started
+- Mechanical and persona tests — after ADAPT exists
 - Two deployments — not started
 
 ## Next move
 
-After approval, implement COORDINATE only (family separated, cannot rely on Mariana).
+After approval, implement ADAPT only (communication fails OR meeting point unavailable).

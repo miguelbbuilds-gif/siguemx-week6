@@ -3,6 +3,7 @@ import { DEFAULT_FAMILY } from './data/family.ts'
 import type { FamilyPlan, Screen } from './domain/types.ts'
 import { ActRehearsal } from './ui/ActRehearsal.tsx'
 import { AppChrome } from './ui/AppChrome.tsx'
+import { CoordinateRehearsal } from './ui/CoordinateRehearsal.tsx'
 import { FamilySetup } from './ui/FamilySetup.tsx'
 import { Home } from './ui/Home.tsx'
 import { Ready } from './ui/Ready.tsx'
@@ -21,7 +22,9 @@ export default function App() {
   return (
     <div className="app">
       <AppChrome
-        currentMode={screen === 'act' ? 'ACT' : null}
+        currentMode={
+          screen === 'act' ? 'ACT' : screen === 'coordinate' ? 'COORDINATE' : null
+        }
         onStop={() => setStopped(true)}
       />
       <main>
@@ -44,10 +47,18 @@ export default function App() {
             onEdit={() => setScreen('setup')}
             onHome={goHome}
             onStartAct={() => setScreen('act')}
+            onStartCoordinate={() => setScreen('coordinate')}
           />
         ) : null}
         {screen === 'act' ? (
           <ActRehearsal paused={stopped} onLeave={() => setScreen('ready')} />
+        ) : null}
+        {screen === 'coordinate' ? (
+          <CoordinateRehearsal
+            family={family}
+            paused={stopped}
+            onLeave={() => setScreen('ready')}
+          />
         ) : null}
       </main>
       {stopped ? (
