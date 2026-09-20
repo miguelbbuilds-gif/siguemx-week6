@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: phone-first foundation (welcome + family setup). ACT, COORDINATE, ADAPT, voice, and adaptive logic are still not implemented.
+Scope: ACT rehearsal implemented. COORDINATE, ADAPT, voice, and adaptive logic are still not implemented.
 
 ## Why this folder is a new project
 
@@ -60,10 +60,9 @@ The Week 6 packet is complete:
 
 ## Remaining work
 
-- Phone-first application foundation — next move
-- ACT, COORDINATE, ADAPT, voice input, and adaptive logic — not started
+- COORDINATE, ADAPT, voice input, and adaptive logic — not started
 - Further commits and two deployments — still required later
-- Mechanical and persona tests — after the working slice exists
+- Mechanical and persona tests — after the remaining modes exist
 
 ## Phone-first foundation — 20 September 2026
 
@@ -73,12 +72,20 @@ The three rehearsal modes, Three.js scene, voice input, and adaptive engine are 
 
 `npm run build` succeeded. Validation checks passed for default, empty, short, and long responsibility text. The in-IDE browser tools were unavailable this session, so the click-through UI was not exercised in a real viewport.
 
+## ACT rehearsal — 20 September 2026
+
+ACT is a night earthquake decision for the synthetic household. The prompt does not tell the user to help Elena; the three options are: go to Elena, wait for Mariana, or move yourself. Measurement records the choice, response time from when options appear (STOP time is subtracted), and whether Elena’s care was assumed without prompting. One behavioral finding is shown. No survival score.
+
+**Visual tradeoff:** ACT uses a simple CSS night-home scene, not Three.js. A full 3D scene would have delayed this milestone without changing the decision, timing, or finding. Three.js remains in the stack for a later interacting Dragon Stack slice.
+
+COORDINATE, ADAPT, voice input, and the adaptive repeat loop are still not implemented. “Make another ACT decision” repeats the same ACT screen; it is not the adaptive modified scenario.
+
 ## Remaining work
 
-- ACT, COORDINATE, ADAPT, voice input, and adaptive logic — not started
+- COORDINATE, ADAPT, voice input, and adaptive logic — not started
 - Mechanical and persona tests — after those modes exist
 - Two deployments — not started
 
 ## Next move
 
-After approval, implement ACT only as a phone-first decision screen (no 3D, voice, or adaptive loop).
+After approval, implement COORDINATE only (family separated, cannot rely on Mariana).

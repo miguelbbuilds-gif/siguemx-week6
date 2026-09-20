@@ -16,4 +16,20 @@ export type FamilyPlan = {
   members: FamilyMember[]
 }
 
-export type Screen = 'welcome' | 'setup' | 'ready'
+export type Screen = 'welcome' | 'setup' | 'ready' | 'act'
+
+export type ActChoiceId = 'help-elena' | 'wait-mariana' | 'move-self'
+
+export type ActChoice = {
+  id: ActChoiceId
+  label: string
+  assumesElenaWithoutPrompt: boolean
+}
+
+export type ActRecord = {
+  choiceId: ActChoiceId
+  label: string
+  responseMs: number
+  assumesElenaWithoutPrompt: boolean
+  finding: string
+}

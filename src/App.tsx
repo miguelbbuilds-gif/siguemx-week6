@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DEFAULT_FAMILY } from './data/family.ts'
 import type { FamilyPlan, Screen } from './domain/types.ts'
+import { ActRehearsal } from './ui/ActRehearsal.tsx'
 import { AppChrome } from './ui/AppChrome.tsx'
 import { FamilySetup } from './ui/FamilySetup.tsx'
 import { Home } from './ui/Home.tsx'
@@ -19,18 +20,15 @@ export default function App() {
 
   return (
     <div className="app">
-      <AppChrome onStop={() => setStopped(true)} />
+      <AppChrome
+        currentMode={screen === 'act' ? 'ACT' : null}
+        onStop={() => setStopped(true)}
+      />
       <main>
-        {stopped ? (
-          <StopPanel
-            onReturnHome={goHome}
-            onContinue={() => setStopped(false)}
-          />
-        ) : null}
-        {!stopped && screen === 'welcome' ? (
+        {screen === 'welcome' ? (
           <Home family={family} onSetup={() => setScreen('setup')} />
         ) : null}
-        {!stopped && screen === 'setup' ? (
+        {screen === 'setup' ? (
           <FamilySetup
             family={family}
             onBack={() => setScreen('welcome')}
@@ -40,14 +38,26 @@ export default function App() {
             }}
           />
         ) : null}
-        {!stopped && screen === 'ready' ? (
+        {screen === 'ready' ? (
           <Ready
             family={family}
             onEdit={() => setScreen('setup')}
             onHome={goHome}
+            onStartAct={() => setScreen('act')}
           />
         ) : null}
+        {screen === 'act' ? (
+          <ActRehearsal paused={stopped} onLeave={() => setScreen('ready')} />
+        ) : null}
       </main>
+      {stopped ? (
+        <div className="stop-overlay">
+          <StopPanel
+            onReturnHome={goHome}
+            onContinue={() => setStopped(false)}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }

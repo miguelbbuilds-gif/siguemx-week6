@@ -38,6 +38,7 @@ textarea {
 }
 
 .app {
+  position: relative;
   max-width: 28rem;
   min-height: 100dvh;
   margin: 0 auto;
@@ -108,6 +109,7 @@ main {
 .primary:focus-visible,
 .secondary:focus-visible,
 .text-link:focus-visible,
+.choice:focus-visible,
 textarea:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
@@ -145,6 +147,10 @@ textarea:focus-visible {
   border: 2px solid var(--teal);
   background: white;
   z-index: 1;
+}
+
+.progress-step.is-active .progress-dot {
+  background: var(--teal);
 }
 
 .progress-label {
@@ -321,6 +327,172 @@ textarea[aria-invalid='true'] {
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 0.9rem;
+}
+
+.stop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 1rem 1.5rem;
+  background: rgba(16, 24, 32, 0.55);
+}
+
+.stop-overlay .stop-panel {
+  width: 100%;
+  margin: 0;
+  background: var(--card);
+}
+
+.prompt {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.choice-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.choice {
+  width: 100%;
+  min-height: 3.15rem;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: #f7fbfa;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.finding {
+  padding: 0.9rem;
+  border-radius: 0.9rem;
+  background: #e8f3f1;
+}
+
+.finding h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+}
+
+.night-scene {
+  position: relative;
+  overflow: hidden;
+  height: 9.5rem;
+  margin: 0 0 0.9rem;
+  border-radius: 0.9rem;
+  background: #1b2433;
+  animation: room-sway 2.8s ease-in-out infinite;
+}
+
+.night-sky {
+  position: absolute;
+  inset: 0 0 45% 0;
+  background: linear-gradient(#121826, #243044);
+}
+
+.night-window {
+  position: absolute;
+  top: 0.7rem;
+  left: 1rem;
+  width: 4.2rem;
+  height: 3.6rem;
+  border: 3px solid #3d4a5c;
+  background: #2a3550;
+}
+
+.night-moon {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.55rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #e8e4c9;
+}
+
+.night-sill {
+  position: absolute;
+  left: -0.2rem;
+  right: -0.2rem;
+  bottom: -0.25rem;
+  height: 0.35rem;
+  background: #4a5568;
+}
+
+.night-room {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background: #2c241c;
+}
+
+.night-lamp {
+  position: absolute;
+  top: -0.4rem;
+  right: 1.3rem;
+  width: 0.7rem;
+  height: 1.4rem;
+  background: #c9a227;
+  opacity: 0.55;
+  animation: lamp-flicker 1.4s ease-in-out infinite;
+}
+
+.night-bed {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.7rem;
+  width: 4.5rem;
+  height: 1.15rem;
+  border-radius: 0.25rem;
+  background: #5a4a3a;
+}
+
+.night-door {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 0.55rem;
+  width: 1.5rem;
+  height: 2.4rem;
+  background: #3b3228;
+}
+
+.night-caption {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.35rem;
+  margin: 0;
+  color: #d7deea;
+  font-size: 0.72rem;
+}
+
+@keyframes lamp-flicker {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  40% {
+    opacity: 0.8;
+  }
+  70% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes room-sway {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
 }
 
 @media (min-width: 40rem) {

@@ -5,15 +5,16 @@ type ReadyProps = {
   family: FamilyPlan
   onEdit: () => void
   onHome: () => void
+  onStartAct: () => void
 }
 
-export function Ready({ family, onEdit, onHome }: ReadyProps) {
+export function Ready({ family, onEdit, onHome, onStartAct }: ReadyProps) {
   return (
     <section className="ready">
       <h1>Family plan saved</h1>
       <p className="lead">
-        ACT, COORDINATE, and ADAPT are next. Those rehearsals are not in this
-        milestone.
+        Start ACT: one immediate decision at night. COORDINATE and ADAPT are not
+        in this milestone.
       </p>
       <IntensityNote compact />
       <ul className="plan-list">
@@ -27,6 +28,9 @@ export function Ready({ family, onEdit, onHome }: ReadyProps) {
         ))}
       </ul>
       <div className="actions">
+        <button type="button" className="primary" onClick={onStartAct}>
+          Start ACT rehearsal
+        </button>
         <button type="button" className="secondary" onClick={onEdit}>
           Edit responsibilities
         </button>

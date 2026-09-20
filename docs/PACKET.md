@@ -265,7 +265,7 @@ Approved Week 6 image-generated mockup (phone-first ACT rehearsal, visible STOP,
 
 ## 24. Current repo status
 
-Phone-first welcome and synthetic family setup are implemented. ACT, COORDINATE, ADAPT, adaptive logic, voice input, measurement runtime, and the 3D rehearsal are not implemented.
+Phone-first welcome, synthetic family setup, and ACT rehearsal are implemented. COORDINATE, ADAPT, adaptive logic, voice input, and a full Three.js scene are not implemented.
 
 ---
 

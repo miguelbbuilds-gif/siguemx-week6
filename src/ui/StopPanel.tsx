@@ -16,7 +16,7 @@ export function StopPanel({ onReturnHome, onContinue }: StopPanelProps) {
           Return to welcome
         </button>
         <button type="button" className="secondary" onClick={onContinue}>
-          Continue setup
+          Continue
         </button>
       </div>
     </section>
