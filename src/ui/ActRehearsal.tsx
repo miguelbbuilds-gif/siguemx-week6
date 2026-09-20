@@ -2,8 +2,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ACT_CHOICES, ACT_SCENARIO } from '../data/actScenario.ts'
 import { formatResponseTime, recordActDecision } from '../measurement/observe.ts'
 import type { ActChoice, ActRecord } from '../domain/types.ts'
+import { FamilyScene3D } from './FamilyScene3D.tsx'
 import { IntensityNote } from './IntensityNote.tsx'
-import { NightHomeScene } from './NightHomeScene.tsx'
+import { VoiceActInput } from './VoiceActInput.tsx'
 
 type ActRehearsalProps = {
   paused: boolean
@@ -55,7 +56,12 @@ export function ActRehearsal({ paused, onLeave, onRecord }: ActRehearsalProps) {
   return (
     <section className="act">
       <p className="kicker">{ACT_SCENARIO.title}</p>
-      <NightHomeScene />
+      <FamilyScene3D
+        mode="act-night"
+        decisionId={record?.choiceId ?? null}
+        paused={paused}
+        caption="Practice 3D room · simple shapes · not real people"
+      />
       <p className="lead">{ACT_SCENARIO.situation}</p>
       <p className="prompt">{ACT_SCENARIO.prompt}</p>
       <IntensityNote compact />
@@ -84,20 +90,23 @@ export function ActRehearsal({ paused, onLeave, onRecord }: ActRehearsalProps) {
           </div>
         </div>
       ) : (
-        <div className="choice-list" role="group" aria-label="ACT decision options">
-          {ACT_CHOICES.map((choice) => (
-            <button
-              key={choice.id}
-              type="button"
-              className="choice"
-              data-testid={`act-choice-${choice.id}`}
-              disabled={paused}
-              onClick={() => choose(choice)}
-            >
-              {choice.label}
-            </button>
-          ))}
-        </div>
+        <>
+          <div className="choice-list" role="group" aria-label="ACT decision options">
+            {ACT_CHOICES.map((choice) => (
+              <button
+                key={choice.id}
+                type="button"
+                className="choice"
+                data-testid={`act-choice-${choice.id}`}
+                disabled={paused}
+                onClick={() => choose(choice)}
+              >
+                {choice.label}
+              </button>
+            ))}
+          </div>
+          <VoiceActInput disabled={paused} onConfirm={choose} />
+        </>
       )}
     </section>
   )

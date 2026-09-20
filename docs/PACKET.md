@@ -4,7 +4,7 @@ Week 6
 Prototype: **SigueMX — Rehearse Before Reality**  
 This is a NEW project. It does not modify or reuse the Week 5 repository.
 
-Project setup (React + Vite + TypeScript, Three.js, placeholder folders) is already in this repository. Product functionality is not implemented yet.
+Phone-first product code is in this repository: family setup, ACT, COORDINATE, ADAPT, one adaptive repeat loop, optional Web Speech input on ACT, and one lightweight Three.js rehearsal scene. WebXR is not used.
 
 ---
 
@@ -265,7 +265,7 @@ Approved Week 6 image-generated mockup (phone-first ACT rehearsal, visible STOP,
 
 ## 24. Current repo status
 
-Phone-first welcome, synthetic family setup, ACT, COORDINATE, ADAPT, behavior observation, and one constrained adaptive repeat loop are implemented. Voice input and a full Three.js scene are not implemented.
+Phone-first welcome, synthetic family setup, ACT, COORDINATE, ADAPT, adaptive loop, optional ACT voice input, and one lightweight Three.js ACT/repeat scene are implemented. Voice is never required. WebXR is not used.
 
 ---
 

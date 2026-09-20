@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: Adaptive behavior loop implemented. Voice input is still not implemented.
+Scope: Dragon Stack connected: 3D ACT scene, optional voice, adaptive loop. WebXR not used.
 
 ## Why this folder is a new project
 
@@ -17,9 +17,9 @@ The three Dragon Stack pieces must interact in one product, not as separate demo
 
 `create-vite` in this folder produced a vanilla TypeScript app (the `react-ts` template flag did not apply). React, React DOM, `@vitejs/plugin-react`, and React type packages were installed next, and the entry was switched to `src/main.tsx` + `src/App.tsx`. That is setup correction, not product work.
 
-## Why placeholder folders exist
+## Why those folders exist
 
-The approved layout reserves one place each for:
+The layout keeps one place each for:
 
 - `src/data` — ONE fictional family
 - `src/domain` — types and the three modes
@@ -28,8 +28,6 @@ The approved layout reserves one place each for:
 - `src/voice` — optional browser voice input
 - `src/scene` — Three.js rehearsal
 - `src/ui` — phone-first screens
-
-Those files are comments only. ACT, COORDINATE, ADAPT, adaptive logic, voice input, and the 3D rehearsal are not implemented.
 
 ## Documentation decisions — packet family and diagrams
 
@@ -58,11 +56,7 @@ The Week 6 packet is complete:
 - Mermaid flowchart and swimlane
 - Image-generated mockup at `docs/mockup-siguemx.png`, embedded in `docs/PACKET.md`
 
-## Remaining work
-
-- ADAPT, voice input, and adaptive logic — not started
-- Further commits and two deployments — still required later
-- Mechanical and persona tests — after ADAPT exists
+Historical note: later slices added ADAPT, the adaptive loop, voice, and 3D. Deployments remain gated.
 
 ## Phone-first foundation — 20 September 2026
 
@@ -118,13 +112,27 @@ The user must change Diego’s written responsibility before **Rehearse again**.
 
 **Limitations:** Keyword/choice-id rules only; three variations only; session memory (no Supabase); English plan-change text; repeating the original three modes still works independently.
 
-Voice input is still not implemented.
+Voice input and the 3D ACT/repeat scene are implemented in the Dragon Stack slice below.
+
+## Dragon Stack — 20 September 2026
+
+ACT uses one lightweight Three.js room (cylinders and spheres, no likenesses, no injuries). A spoken **or** tapped choice becomes the same `ActRecord` (`recordActDecision`), which feeds measurement and `runAdaptiveEngine`. The modified **Rehearse again** screen uses the same renderer with a visible variation: Mariana hidden when the coordinator is unreachable; a red blocker and/or green backup marker when the meeting place is blocked; Diego eases toward Elena, the door, or the backup marker after the decision.
+
+Voice uses the browser Web Speech API (`SpeechRecognition` / `webkitSpeechRecognition`) when present. Speech is mapped to the three ACT options with English keywords (`matchActSpeech`). The recognized transcript and matched label are shown before **Confirm this decision**. Confirm uses the same `choose` path as tap, including response time (timer starts when ACT options appear; STOP pause is subtracted). If speech is missing, permission is denied, recognition errors, or the phrase does not match, tap still works. Voice is never required to finish ACT.
+
+**Voice limits:** Chrome and Edge are the practical browsers. Safari support is incomplete or prefixed; Firefox often has none. Recognition is `en-US` only, on-device/browser quality, not a vendor SDK. Noisy rooms, accents, and mixed phrases (Elena + wait) can mis-map; unmatched speech never auto-commits. Microphone permission can be denied; the UI then tells the user to tap. HTTPS or localhost is required. This automation cannot prove a real microphone in every environment.
+
+**3D tradeoffs:** One small WebGL canvas (~10.5rem tall) on the phone layout, not a city, physics world, or WebXR/headset path. No React Three Fiber. Pixel ratio is capped at 2. If WebGL construction fails, the older CSS night room is shown. COORDINATE and ADAPT stay 2D CSS maps so the stack stays usable on a normal phone. The scene is a rehearsal cue, not a disaster generator. Simulated movement does not prove real-world survival.
+
+STOP still overlays the app, pauses ACT/repeat timers, and freezes the 3D loop without disposing the renderer until the screen unmounts. Intensity disclosure remains.
+
+COORDINATE and ADAPT remain independently reachable from the family-plan screen.
 
 ## Remaining work
 
-- Voice input — not started
-- Mechanical and persona tests, two deployments — still required
+- Mechanical and persona tests in a real phone browser, two deployments — still required
+- Do not deploy until this Dragon Stack slice is approved
 
 ## Next move
 
-After approval, optional browser voice input that writes structured decision data, or first deployment.
+After approval, first Vercel deployment.

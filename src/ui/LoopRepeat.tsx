@@ -3,6 +3,7 @@ import { findingForRepeat, recordRepeatDecision } from '../adaptive/loop.ts'
 import { repeatScenario } from '../data/repeatScenario.ts'
 import { formatResponseTime } from '../measurement/observe.ts'
 import type { RepeatChoice, RepeatRecord, VariationId } from '../domain/types.ts'
+import { FamilyScene3D } from './FamilyScene3D.tsx'
 import { IntensityNote } from './IntensityNote.tsx'
 
 type LoopRepeatProps = {
@@ -62,6 +63,12 @@ export function LoopRepeat({
   return (
     <section className="loop-repeat">
       <p className="kicker">{scenario.title}</p>
+      <FamilyScene3D
+        mode={variation === 'none' ? 'act-night' : variation}
+        decisionId={record?.choiceId ?? null}
+        paused={paused}
+        caption="Modified 3D rehearsal · same family, different constraints"
+      />
       <p className="lead">{scenario.situation}</p>
       <p className="prompt">{scenario.prompt}</p>
       <IntensityNote compact />
