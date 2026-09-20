@@ -1,2 +1,3 @@
-/** Placeholder. ACT, COORDINATE, and ADAPT are not implemented yet. */
-export {}
+import { REHEARSAL_MODES } from './types.ts'
+
+export { REHEARSAL_MODES }

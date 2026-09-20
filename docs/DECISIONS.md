@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: packet-before-code complete. First commit records setup and packet. ACT, COORDINATE, ADAPT, voice, and adaptive logic are still not implemented.
+Scope: phone-first foundation (welcome + family setup). ACT, COORDINATE, ADAPT, voice, and adaptive logic are still not implemented.
 
 ## Why this folder is a new project
 
@@ -65,6 +65,20 @@ The Week 6 packet is complete:
 - Further commits and two deployments — still required later
 - Mechanical and persona tests — after the working slice exists
 
+## Phone-first foundation — 20 September 2026
+
+Built welcome, STOP, intensity disclosure, ACT → COORDINATE → ADAPT progress labels, and synthetic family setup (Mariana, Elena, Diego). Responsibilities are editable; names and ages stay as the demo household. Empty, too-short, and too-long responsibilities are blocked.
+
+The three rehearsal modes, Three.js scene, voice input, and adaptive engine are still not implemented. Progress is visual only.
+
+`npm run build` succeeded. Validation checks passed for default, empty, short, and long responsibility text. The in-IDE browser tools were unavailable this session, so the click-through UI was not exercised in a real viewport.
+
+## Remaining work
+
+- ACT, COORDINATE, ADAPT, voice input, and adaptive logic — not started
+- Mechanical and persona tests — after those modes exist
+- Two deployments — not started
+
 ## Next move
 
-Build the phone-first foundation (layout that can work in a normal phone browser, aligned with the mockup: header, STOP, intensity disclosure, synthetic family). Do not implement ACT, COORDINATE, ADAPT, voice, or adaptive logic yet.
+After approval, implement ACT only as a phone-first decision screen (no 3D, voice, or adaptive loop).

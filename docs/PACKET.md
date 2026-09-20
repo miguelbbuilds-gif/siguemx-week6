@@ -265,12 +265,10 @@ Approved Week 6 image-generated mockup (phone-first ACT rehearsal, visible STOP,
 
 ## 24. Current repo status
 
-Setup only. ACT, COORDINATE, ADAPT, adaptive logic, voice input, measurement runtime, and the 3D rehearsal are not implemented.
+Phone-first welcome and synthetic family setup are implemented. ACT, COORDINATE, ADAPT, adaptive logic, voice input, measurement runtime, and the 3D rehearsal are not implemented.
 
 ---
 
 ## 25. Next move
-
-Packet-before-code is complete. Next: build the phone-first foundation. Do not implement ACT, COORDINATE, ADAPT, voice, or adaptive logic in that step until approved.
 
 See `docs/DECISIONS.md`.
