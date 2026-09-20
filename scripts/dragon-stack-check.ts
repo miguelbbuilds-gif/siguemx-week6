@@ -7,6 +7,7 @@ import {
   runAdaptiveEngine,
 } from '../src/adaptive/loop.ts'
 import { matchActSpeech } from '../src/voice/speech.ts'
+import { progressNote } from '../src/ui/progressNote.ts'
 
 const checks: Array<{ name: string; ok: boolean }> = []
 
@@ -85,6 +86,22 @@ assert(
   'wait-for-Mariana path triggers coordinator variation',
   engineWait.weakness === 'depends-on-coordinator' &&
     engineWait.variation === 'unreachable-and-blocked',
+)
+
+assert(
+  'ready screen does not say rehearsals not started',
+  progressNote({ screen: 'ready', currentMode: null, recordedModes: [] }) ===
+    'Family plan · no decisions yet',
+)
+assert(
+  'recorded ACT is visible in the header',
+  progressNote({ screen: 'ready', currentMode: null, recordedModes: ['ACT'] }) ===
+    'Family plan · recorded: ACT',
+)
+assert(
+  'welcome with no records still says not started',
+  progressNote({ screen: 'welcome', currentMode: null, recordedModes: [] }) ===
+    'Family setup · rehearsals not started',
 )
 
 const failed = checks.filter((item) => !item.ok)

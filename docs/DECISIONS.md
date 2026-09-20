@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: Dragon Stack connected: 3D ACT scene, optional voice, adaptive loop. WebXR not used.
+Scope: Mechanical test of the public Week 6 deploy. One header-status bug fixed. Persona test not started.
 
 ## Why this folder is a new project
 
@@ -142,10 +142,33 @@ Published as **siguemx-week6** on GitHub:
 
 Vercel deployment is **not** part of this step.
 
+## Mechanical test — 20 September 2026
+
+Public URL tested: https://siguemx-week6.vercel.app (phone-width metrics 390×844).
+
+**Performed on the live site**
+
+- Welcome: STOP visible; intensity disclosure present; synthetic Mariana/Elena/Diego; no preparedness/survival/fear score; copy says practice does not predict real-world survival.
+- Family setup: too-short Mariana text (`x`) was blocked with “Write a bit more so the family knows what to do.”
+- Restore demo plan + save reached **Family plan saved** with ACT / COORDINATE / ADAPT start buttons.
+
+**Bug (reproduced)**
+
+- Steps: open the public app → Set up this family → Save family plan.
+- Expected: after the plan is saved, the header should not say rehearsals have not started.
+- Actual: Ready still showed `Family setup · rehearsals not started` (same string as the empty welcome screen). Completing ACT would keep that lie, because Ready/welcome never pass a mode into the chrome.
+- Root cause: `AppChrome` defaults to that string whenever `currentMode` is null. Only ACT/COORDINATE/ADAPT set a mode; Ready, setup, and welcome after a saved plan do not.
+- Fix: `progressNote()` now reports `Family plan · no decisions yet`, `Family plan · recorded: ACT`, or `Family plan · three modes recorded` from the actual session records.
+
+**Not finished in this agent browser (MCP dropped mid-flow)**
+
+Voice with a real microphone, COORDINATE, ADAPT, the adaptive repeat + comparison, STOP during an open choice list, denied-mic UI, and refresh after a recorded decision need a manual pass on the phone. Session memory is still in-memory only: a full reload returns to welcome.
+
 ## Remaining work
 
-- Two Vercel deployments, plus mechanical and persona tests on a real phone browser
+- Persona test (Doña Mari) after approval
+- Confirm the mechanical-test Vercel redeploy
 
 ## Next move
 
-After approval, first Vercel deployment. Do not deploy until that milestone is approved.
+Stop here. Do not start persona testing until approved.

@@ -13,6 +13,7 @@ import type {
   CoordinateRecord,
   FamilyPlan,
   RepeatRecord,
+  RehearsalMode,
   Screen,
 } from './domain/types.ts'
 import { AdaptRehearsal } from './ui/AdaptRehearsal.tsx'
@@ -24,6 +25,7 @@ import { Home } from './ui/Home.tsx'
 import { LoopCompare } from './ui/LoopCompare.tsx'
 import { LoopFinding } from './ui/LoopFinding.tsx'
 import { LoopRepeat } from './ui/LoopRepeat.tsx'
+import { progressNote } from './ui/progressNote.ts'
 import { Ready } from './ui/Ready.tsx'
 import { StopPanel } from './ui/StopPanel.tsx'
 
@@ -62,15 +64,21 @@ export default function App() {
           ? 'ADAPT'
           : null
 
+  const recordedModes: RehearsalMode[] = [
+    actRecord ? ('ACT' as const) : null,
+    coordinateRecord ? ('COORDINATE' as const) : null,
+    adaptRecord ? ('ADAPT' as const) : null,
+  ].filter((mode): mode is RehearsalMode => mode !== null)
+
   return (
     <div className="app">
       <AppChrome
         currentMode={chromeMode}
-        note={
-          screen === 'loop-finding' || screen === 'loop-repeat' || screen === 'loop-compare'
-            ? 'Adaptive repeat loop'
-            : undefined
-        }
+        note={progressNote({
+          screen,
+          currentMode: chromeMode,
+          recordedModes,
+        })}
         onStop={() => setStopped(true)}
       />
       <main>
