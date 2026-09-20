@@ -128,11 +128,24 @@ STOP still overlays the app, pauses ACT/repeat timers, and freezes the 3D loop w
 
 COORDINATE and ADAPT remain independently reachable from the family-plan screen.
 
+## GitHub publishing — 20 September 2026
+
+This Week 6 project is a **new** repository. Week 5 was not modified.
+
+Published as **siguemx-week6** on GitHub:
+
+- Repository: https://github.com/miguelbbuilds-gif/siguemx-week6
+- Branch pushed: `master`
+- Remote: `origin` (`https://github.com/miguelbbuilds-gif/siguemx-week6.git`)
+
+`.gitignore` excludes `node_modules`, `dist`, `*.local`, `.env`, and `.env.*`. No secrets or real personal data are tracked. Demo household names remain synthetic.
+
+Vercel deployment is **not** part of this step.
+
 ## Remaining work
 
-- Mechanical and persona tests in a real phone browser, two deployments — still required
-- Do not deploy until this Dragon Stack slice is approved
+- Two Vercel deployments, plus mechanical and persona tests on a real phone browser
 
 ## Next move
 
-After approval, first Vercel deployment.
+After approval, first Vercel deployment. Do not deploy until that milestone is approved.
