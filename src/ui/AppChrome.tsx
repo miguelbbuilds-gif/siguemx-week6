@@ -1,5 +1,6 @@
 import { REHEARSAL_MODES } from '../domain/modes.ts'
 import type { RehearsalMode } from '../domain/types.ts'
+import { modeLabel } from './labels.ts'
 
 type AppChromeProps = {
   currentMode?: RehearsalMode | null
@@ -10,7 +11,7 @@ type AppChromeProps = {
 export function AppChrome({ currentMode = null, note, onStop }: AppChromeProps) {
   const status =
     note ??
-    (currentMode ? `${currentMode} rehearsal` : 'Family setup · rehearsals not started')
+    (currentMode ? `Práctica: ${modeLabel(currentMode)}` : 'Aún no empieza la práctica')
 
   return (
     <header className="chrome">
@@ -21,11 +22,11 @@ export function AppChrome({ currentMode = null, note, onStop }: AppChromeProps) 
           </span>
           <div>
             <p className="brand-name">SigueMX</p>
-            <p className="brand-sub">Rehearse Before Reality</p>
+            <p className="brand-sub">Practica antes de que pase</p>
           </div>
         </div>
         <button type="button" className="stop" onClick={onStop}>
-          STOP
+          DETENER
         </button>
       </div>
       <ol className="progress" aria-label={status}>
@@ -38,7 +39,7 @@ export function AppChrome({ currentMode = null, note, onStop }: AppChromeProps) 
           >
             {index > 0 ? <span className="progress-line" aria-hidden="true" /> : null}
             <span className="progress-dot" aria-hidden="true" />
-            <span className="progress-label">{mode}</span>
+            <span className="progress-label">{modeLabel(mode)}</span>
           </li>
         ))}
       </ol>

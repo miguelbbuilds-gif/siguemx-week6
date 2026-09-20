@@ -60,7 +60,7 @@ export function ActRehearsal({ paused, onLeave, onRecord }: ActRehearsalProps) {
         mode="act-night"
         decisionId={record?.choiceId ?? null}
         paused={paused}
-        caption="Practice 3D room · simple shapes · not real people"
+        caption="Cuarto de práctica · figuras simples · no son personas reales"
       />
       <p className="lead">{ACT_SCENARIO.situation}</p>
       <p className="prompt">{ACT_SCENARIO.prompt}</p>
@@ -68,30 +68,30 @@ export function ActRehearsal({ paused, onLeave, onRecord }: ActRehearsalProps) {
 
       {record ? (
         <div className="finding" data-testid="act-finding">
-          <h2>One behavioral finding</h2>
+          <h2>Un hallazgo de esta decisión</h2>
           <p>{record.finding}</p>
           <p className="fine-print" data-testid="act-response-time">
-            Decision: {record.label} · Response time: {formatResponseTime(record.responseMs)}
+            Decisión: {record.label} · Tiempo de respuesta: {formatResponseTime(record.responseMs)}
           </p>
           <p className="fine-print" data-testid="act-elena">
-            Responsibility for Elena without prompting:{' '}
-            {record.assumesElenaWithoutPrompt ? 'yes' : 'no'}
+            Se hizo cargo de Elena sin que se lo pidieran:{' '}
+            {record.assumesElenaWithoutPrompt ? 'sí' : 'no'}
           </p>
           <p className="fine-print">
-            This is practice. It does not predict real-world survival.
+            Esto es práctica. No garantiza que en un sismo de verdad vayan a estar a salvo.
           </p>
           <div className="actions">
             <button type="button" className="primary" onClick={retry}>
-              Make another ACT decision
+              Decidir otra vez
             </button>
             <button type="button" className="secondary" onClick={onLeave}>
-              Back to family plan
+              Volver al plan de la familia
             </button>
           </div>
         </div>
       ) : (
         <>
-          <div className="choice-list" role="group" aria-label="ACT decision options">
+          <div className="choice-list" role="group" aria-label="Opciones para decidir ahora">
             {ACT_CHOICES.map((choice) => (
               <button
                 key={choice.id}

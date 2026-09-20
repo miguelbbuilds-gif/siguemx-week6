@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: Mechanical test of the public Week 6 deploy. One header-status bug fixed. Persona test not started.
+Scope: Persona test. User-facing MVP translated to everyday Mexican Spanish.
 
 ## Why this folder is a new project
 
@@ -166,9 +166,22 @@ Voice with a real microphone, COORDINATE, ADAPT, the adaptive repeat + compariso
 
 ## Remaining work
 
-- Persona test (Doña Mari) after approval
-- Confirm the mechanical-test Vercel redeploy
+- Persona test complete; Spanish UI shipped in this slice
 
 ## Next move
 
-Stop here. Do not start persona testing until approved.
+Wait for approval of the Spanish usability fix.
+
+## Persona test — 20 September 2026
+
+Persona: **Doña Mari**, 54, vende comida afuera del metro en la Ciudad de México. Usa WhatsApp, desconfía de apps nuevas, lee despacio y puede abandonar en silencio si no entiende.
+
+**Confusión real:** entendió que SigueMX ayuda a practicar decisiones de emergencia, pero la interfaz en inglés la dejó insegura de qué hacer y de si le pedían datos de una familia real. Le resultaron extraños: *synthetic demo family*, *rehearse*, *institutional drills*, *real-world survival*, *intensity*, *family coordinator*.
+
+**Problema priorizado:** la experiencia no estaba en español cotidiano.
+
+**Cambios:** toda la interfaz visible pasó a español mexicano claro. CTA principal **Empezar práctica**. Familia de ejemplo y aviso de que no hay que escribir datos reales. **DETENER** visible. “Qué esperar de esta práctica” en lugar de *intensity*. ACT / COORDINATE / ADAPT se quedan por dentro; la persona ve Decidir / Separados / Otro plan. El reconocimiento de voz pide `es-MX` y palabras en español; el toque sigue siendo suficiente. Las reglas del motor no cambiaron; solo se añadieron señales en español para el plan escrito.
+
+**Verificación:** `npm run build`; chequeos de voz en español y de encabezado; flujo de toque en el navegador del agente cuando esté disponible.
+
+**Límites:** el reconocimiento de voz en español depende del navegador; Safari/Firefox varían. Un recargo de página sigue borrando la sesión. Los documentos internos del paquete pueden seguir en inglés.

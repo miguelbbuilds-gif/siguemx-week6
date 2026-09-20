@@ -48,7 +48,7 @@ export default function App() {
 
   const engine = useMemo(() => runAdaptiveEngine(firstObservations), [firstObservations])
   const allModesDone = Boolean(actRecord && coordinateRecord && adaptRecord)
-  const backupPlace = family.backupMeetingPoint.trim() || 'the school courtyard'
+  const backupPlace = family.backupMeetingPoint.trim() || 'el patio de la escuela'
 
   function goHome() {
     setStopped(false)

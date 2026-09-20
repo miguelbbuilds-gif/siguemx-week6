@@ -1,26 +1,26 @@
 import type { ActChoice } from '../domain/types.ts'
 
 export const ACT_SCENARIO = {
-  title: 'ACT — Quick decision',
-  prompt: 'What do you do first?',
+  title: 'Decidir — Qué haces primero',
+  prompt: '¿Qué haces primero?',
   situation:
-    'It is night. The home shakes and the lights flicker. You cannot see everyone clearly, and you do not know if the shaking will stop.',
+    'Es de noche. La casa se mueve y las luces parpadean. No ves bien a todos, y no sabes si el movimiento va a parar.',
 } as const
 
 export const ACT_CHOICES: ActChoice[] = [
   {
     id: 'help-elena',
-    label: 'Go to Elena and move with her to a safer place inside.',
+    label: 'Ir con Elena y moverse con ella a un lugar más seguro dentro de la casa.',
     assumesElenaWithoutPrompt: true,
   },
   {
     id: 'wait-mariana',
-    label: 'Wait for Mariana to say what to do before moving.',
+    label: 'Esperar a que Mariana diga qué hacer antes de moverse.',
     assumesElenaWithoutPrompt: false,
   },
   {
     id: 'move-self',
-    label: 'Move yourself to a safer place inside now.',
+    label: 'Moverte tú a un lugar más seguro dentro de la casa, ahora.',
     assumesElenaWithoutPrompt: false,
   },
 ]

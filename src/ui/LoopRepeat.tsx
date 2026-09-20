@@ -67,27 +67,29 @@ export function LoopRepeat({
         mode={variation === 'none' ? 'act-night' : variation}
         decisionId={record?.choiceId ?? null}
         paused={paused}
-        caption="Modified 3D rehearsal · same family, different constraints"
+        caption="Práctica distinta · la misma familia, otras condiciones"
       />
       <p className="lead">{scenario.situation}</p>
       <p className="prompt">{scenario.prompt}</p>
       <IntensityNote compact />
       {record ? (
         <div className="finding" data-testid="repeat-finding">
-          <h2>One behavioral finding</h2>
+          <h2>Un hallazgo de esta decisión</h2>
           <p>{findingForRepeat({ id: record.choiceId, label: record.label }, backupPlace)}</p>
           <p className="fine-print" data-testid="repeat-response-time">
-            Decision: {record.label} · Response time: {formatResponseTime(record.responseMs)}
+            Decisión: {record.label} · Tiempo de respuesta: {formatResponseTime(record.responseMs)}
           </p>
-          <p className="fine-print">This is practice. It does not predict real-world survival.</p>
+          <p className="fine-print">
+            Esto es práctica. No garantiza que en un sismo de verdad vayan a estar a salvo.
+          </p>
           <div className="actions">
             <button type="button" className="primary" onClick={onCompare}>
-              Compare attempts
+              Comparar las dos veces
             </button>
           </div>
         </div>
       ) : (
-        <div className="choice-list" role="group" aria-label="Repeat rehearsal options">
+        <div className="choice-list" role="group" aria-label="Opciones de la segunda práctica">
           {scenario.choices.map((choice) => (
             <button
               key={choice.id}

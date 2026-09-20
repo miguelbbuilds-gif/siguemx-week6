@@ -11,25 +11,25 @@ export function validateFamilyPlan(plan: FamilyPlan): FamilyErrors {
   for (const member of plan.members) {
     const value = member.responsibility.trim()
     if (!value) {
-      errors[member.id] = `Add ${member.name}'s responsibility.`
+      errors[member.id] = `Escribe qué hace ${member.name} en un sismo.`
       continue
     }
     if (value.length < MIN) {
-      errors[member.id] = 'Write a bit more so the family knows what to do.'
+      errors[member.id] = 'Escribe un poco más para que la familia sepa qué hacer.'
       continue
     }
     if (value.length > MAX) {
-      errors[member.id] = `Keep this under ${MAX} characters.`
+      errors[member.id] = `Deja esto en menos de ${MAX} letras.`
     }
   }
 
   const meetingPoint = plan.meetingPoint.trim()
   if (!meetingPoint) {
-    errors.meetingPoint = 'Add the family’s meeting point.'
+    errors.meetingPoint = 'Escribe el punto de reunión de la familia.'
   } else if (meetingPoint.length < 3) {
-    errors.meetingPoint = 'Name the meeting place more clearly.'
+    errors.meetingPoint = 'Nombra el lugar con más claridad.'
   } else if (meetingPoint.length > MAX) {
-    errors.meetingPoint = `Keep this under ${MAX} characters.`
+    errors.meetingPoint = `Deja esto en menos de ${MAX} letras.`
   }
 
   return errors

@@ -91,11 +91,11 @@ const VARIATION_FOR: Record<Exclude<WeaknessId, 'none'>, VariationId> = {
 
 const FINDING_FOR: Record<Exclude<WeaknessId, 'none'>, string> = {
   'depends-on-coordinator':
-    'One weakness: dependence on the normal family coordinator. The next rehearsal will make Mariana unreachable while the original meeting point is also unavailable.',
+    'Un punto débil: esperar a quien normalmente organiza a la familia. La siguiente práctica hará que no se pueda hablar con Mariana, y además el punto de reunión de siempre no se podrá usar.',
   'repeats-failed-plan':
-    'One weakness: repeating the original meeting point after it failed. The next rehearsal will keep that place blocked and require a backup place.',
+    'Un punto débil: volver al punto de reunión después de que ya no se pudo usar. La siguiente práctica dejará ese lugar cerrado y pedirá un lugar de respaldo.',
   'skips-elena':
-    'One weakness: Elena’s need was not taken in the first move. The next rehearsal will keep Mariana unreachable so someone else must decide about Elena.',
+    'Un punto débil: en el primer paso no se pensó en Elena. La siguiente práctica hará que no se pueda hablar con Mariana, para que otra persona decida sobre Elena.',
 }
 
 export function runAdaptiveEngine(observations: BehaviorObservation[]): AdaptiveResult {
@@ -117,7 +117,7 @@ export function runAdaptiveEngine(observations: BehaviorObservation[]): Adaptive
     weakness: 'none',
     variation: 'none',
     finding:
-      'No single weakness stood out in these three decisions. The original modes still work; there is no modified repeat for this round.',
+      'En estas tres decisiones no destacó un solo punto débil. Las prácticas de siempre siguen disponibles; en esta ronda no hay una segunda práctica distinta.',
     sourceMode: null,
     sourceLabel: '',
   }
@@ -128,25 +128,25 @@ export function summarizeAttempt(observation: BehaviorObservation): string {
     observation.decisionId === 'wait-mariana' ||
     observation.decisionId === 'wait-instructions'
   ) {
-    return 'You waited for Mariana.'
+    return 'Esperaste a Mariana.'
   }
   if (observation.decisionId === 'follow-backup' || observation.decisionId === 'follow-plan') {
-    return 'You followed the backup plan without waiting.'
+    return 'Seguiste el plan sin esperar.'
   }
   if (observation.decisionId === 'choose-alternative') {
-    return 'You chose a new meeting place.'
+    return 'Elegiste un lugar nuevo para reunirse.'
   }
   if (observation.decisionId === 'keep-meeting-point' || observation.decisionId === 'original-point') {
-    return 'You continued toward the original meeting point.'
+    return 'Seguiste hacia el punto de reunión de siempre.'
   }
   if (observation.decisionId === 'help-elena') {
-    return 'You went to Elena without waiting to be told.'
+    return 'Fuiste con Elena sin esperar a que te lo dijeran.'
   }
   if (observation.decisionId === 'move-self') {
-    return 'You moved yourself first.'
+    return 'Primero te moviste tú.'
   }
   if (observation.decisionId === 'diego-to-elena') {
-    return 'You sent Diego toward Elena without waiting for Mariana.'
+    return 'Mandaste a Diego con Elena sin esperar a Mariana.'
   }
   return observation.decisionLabel
 }
@@ -156,8 +156,8 @@ export function compareAttempts(
   second: BehaviorObservation,
 ): { first: string; second: string } {
   return {
-    first: `First attempt: ${summarizeAttempt(first)}`,
-    second: `Second attempt: ${summarizeAttempt(second)}`,
+    first: `Primera vez: ${summarizeAttempt(first)}`,
+    second: `Segunda vez: ${summarizeAttempt(second)}`,
   }
 }
 
@@ -189,15 +189,15 @@ export function observationFromRepeat(
 
 export function findingForRepeat(choice: RepeatChoice, backupPlace: string): string {
   if (choice.id === 'follow-backup') {
-    return `You used the backup plan (${backupPlace}) without waiting for Mariana.`
+    return `Usaste el plan de respaldo (${backupPlace}) sin esperar a Mariana.`
   }
   if (choice.id === 'help-elena') {
-    return 'You took responsibility for Elena without waiting for Mariana.'
+    return 'Te hiciste cargo de Elena sin esperar a Mariana.'
   }
   if (choice.id === 'wait-mariana') {
-    return 'You still waited for the usual coordinator while she was unreachable.'
+    return 'Otra vez esperaste a quien normalmente organiza, aunque no se le podía hablar.'
   }
-  return 'You still aimed at the original meeting point after it was unavailable.'
+  return 'Otra vez te dirigiste al punto de reunión de siempre, después de que ya no se podía usar.'
 }
 
 export function recordRepeatDecision(
@@ -222,17 +222,17 @@ export function planChangePrompt(weakness: WeaknessId): {
 } | null {
   if (weakness === 'depends-on-coordinator' || weakness === 'repeats-failed-plan') {
     return {
-      label: 'Change one part of the plan: Diego’s responsibility for a backup meeting place.',
+      label: 'Cambia una parte del plan: qué hace Diego con un punto de reunión de respaldo.',
       suggested:
-        'Diego follows the backup meeting place (school courtyard) without waiting for Mariana.',
-      backupPlace: 'the school courtyard',
+        'Diego va al patio de la escuela, que es el punto de reunión de respaldo, sin esperar a Mariana.',
+      backupPlace: 'el patio de la escuela',
     }
   }
   if (weakness === 'skips-elena') {
     return {
-      label: 'Change one part of the plan: who helps Elena if Mariana cannot coordinate.',
-      suggested: 'Diego checks on Elena first if Mariana cannot be reached.',
-      backupPlace: 'the school courtyard',
+      label: 'Cambia una parte del plan: quién ayuda a Elena si no se puede hablar con Mariana.',
+      suggested: 'Diego pregunta por Elena primero si no se puede hablar con Mariana.',
+      backupPlace: 'el patio de la escuela',
     }
   }
   return null

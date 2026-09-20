@@ -7,7 +7,7 @@ type SeparationMapProps = {
 
 export function SeparationMap({ family }: SeparationMapProps) {
   return (
-    <ul className="places" aria-label="Where the family is right now">
+    <ul className="places" aria-label="Dónde está la familia ahora">
       {COORDINATE_PLACES.map((place) => {
         const member = family.members.find((item) => item.id === place.id)
         if (!member) return null

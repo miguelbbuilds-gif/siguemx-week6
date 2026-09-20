@@ -9,11 +9,11 @@ type HomeProps = {
 export function Home({ family, onSetup }: HomeProps) {
   return (
     <section className="welcome">
-      <p className="kicker">Synthetic demo family</p>
-      <h1>Practice the decisions your family hasn’t rehearsed.</h1>
+      <p className="kicker">Familia de ejemplo</p>
+      <h1>Practica las decisiones que tu familia aún no ha ensayado juntas.</h1>
       <p className="lead">
-        Institutional drills are not the same as deciding together when you are
-        separated, someone needs help, or the expected plan fails.
+        Un simulacro en la escuela o el trabajo no es lo mismo que decidir en familia
+        cuando están separados, alguien necesita ayuda, o el plan de siempre no se puede usar.
       </p>
       <IntensityNote />
       <ul className="family-preview">
@@ -27,11 +27,11 @@ export function Home({ family, onSetup }: HomeProps) {
         ))}
       </ul>
       <p className="fine-print">
-        Mariana, Elena, and Diego are invented names for demonstration. They are not
-        real people.
+        Esta es una familia inventada para practicar. No necesitas escribir datos reales.
+        Mariana, Elena y Diego no son personas reales.
       </p>
       <button type="button" className="primary" onClick={onSetup}>
-        Set up this family
+        Empezar práctica
       </button>
     </section>
   )

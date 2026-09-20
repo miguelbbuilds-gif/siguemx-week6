@@ -9,10 +9,10 @@ export function BlockedMeetingScene({ meetingPoint }: BlockedMeetingSceneProps) 
       <div className="adapt-plaza is-blocked">
         <span className="adapt-x">×</span>
         <p>{meetingPoint}</p>
-        <p className="adapt-tag">Unavailable</p>
+        <p className="adapt-tag">No se puede usar</p>
       </div>
       <div className="adapt-alt">
-        <p>Open side street</p>
+        <p>Calle abierta</p>
       </div>
     </div>
   )

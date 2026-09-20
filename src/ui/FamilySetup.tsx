@@ -51,11 +51,13 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
   return (
     <section className="setup">
       <button type="button" className="text-link" onClick={onBack}>
-        Back
+        Atrás
       </button>
-      <h1>Family setup</h1>
+      <h1>Quién hace qué</h1>
       <p className="lead">
-        Confirm who does what. Names and ages stay as the synthetic demo household.
+        Revisa qué haría cada quien. Los nombres y edades se quedan como familia de
+        ejemplo. Esta es una familia inventada para practicar. No necesitas escribir
+        datos reales.
       </p>
       <IntensityNote compact />
       <form
@@ -74,7 +76,7 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
                 {member.name}, {member.age}
               </legend>
               <p className="role">{member.role}</p>
-              <label htmlFor={fieldId}>Responsibility</label>
+              <label htmlFor={fieldId}>Qué hace esta persona</label>
               <textarea
                 id={fieldId}
                 name={fieldId}
@@ -95,8 +97,8 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
           )
         })}
         <fieldset className="member-card">
-          <legend>Meeting point</legend>
-          <label htmlFor="meeting-point">Where the family agreed to meet</label>
+          <legend>Punto de reunión</legend>
+          <label htmlFor="meeting-point">Dónde acordaron verse</label>
           <textarea
             id="meeting-point"
             name="meeting-point"
@@ -114,10 +116,10 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
         </fieldset>
         <div className="actions">
           <button type="submit" className="primary">
-            Save family plan
+            Guardar este plan
           </button>
           <button type="button" className="secondary" onClick={handleReset}>
-            Restore demo plan
+            Volver al ejemplo
           </button>
         </div>
       </form>

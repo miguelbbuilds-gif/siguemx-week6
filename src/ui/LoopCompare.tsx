@@ -14,24 +14,24 @@ export function LoopCompare({ first, second, onHome }: LoopCompareProps) {
 
   return (
     <section className="loop">
-      <p className="kicker">Compare attempts</p>
-      <h1>What changed</h1>
+      <p className="kicker">Comparar las dos veces</p>
+      <h1>Qué cambió</h1>
       <IntensityNote compact />
       <div className="finding" data-testid="loop-compare">
         <p data-testid="compare-first">{lines.first}</p>
         <p data-testid="compare-second">{lines.second}</p>
         <p className="fine-print">
-          First response {formatResponseTime(first.responseMs)} · Second response{' '}
+          Primera respuesta {formatResponseTime(first.responseMs)} · Segunda respuesta{' '}
           {formatResponseTime(second.responseMs)}
         </p>
         <p className="fine-print">
-          This comparison is about decisions in rehearsal. It does not predict real-world
-          survival.
+          Esta comparación es sobre decisiones en la práctica. No garantiza que en un
+          sismo de verdad vayan a estar a salvo.
         </p>
       </div>
       <div className="actions">
         <button type="button" className="primary" onClick={onHome}>
-          Back to family plan
+          Volver al plan de la familia
         </button>
       </div>
     </section>

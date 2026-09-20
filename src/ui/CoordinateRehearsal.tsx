@@ -79,36 +79,37 @@ export function CoordinateRehearsal({
 
       {record ? (
         <div className="finding" data-testid="coordinate-finding">
-          <h2>One behavioral finding</h2>
+          <h2>Un hallazgo de esta decisión</h2>
           <p>{record.finding}</p>
           <p className="fine-print" data-testid="coordinate-response-time">
-            Decision: {record.label} · Response time: {formatResponseTime(record.responseMs)}
+            Decisión: {record.label} · Tiempo de respuesta: {formatResponseTime(record.responseMs)}
           </p>
           <p className="fine-print" data-testid="coordinate-reliance">
-            Relied on Mariana: {record.reliesOnMariana ? 'yes' : 'no'} · Matched saved plan:{' '}
-            {record.matchesPlan ? 'yes' : 'no'}
+            Dependió de Mariana: {record.reliesOnMariana ? 'sí' : 'no'} · Coincidió con el plan:{' '}
+            {record.matchesPlan ? 'sí' : 'no'}
           </p>
           <p className="fine-print">
-            Saved Diego plan: {family.members.find((member) => member.id === 'diego')?.responsibility}
+            Plan escrito de Diego:{' '}
+            {family.members.find((member) => member.id === 'diego')?.responsibility}
           </p>
           <p className="fine-print">
-            Plan signals: wait for Mariana {signals.waitsForMariana ? 'yes' : 'no'}; Diego acts if
-            she is absent {signals.diegoActsIfMarianaAbsent ? 'yes' : 'no'}.
+            Señales del plan: esperar a Mariana {signals.waitsForMariana ? 'sí' : 'no'}; Diego actúa
+            si ella no está {signals.diegoActsIfMarianaAbsent ? 'sí' : 'no'}.
           </p>
           <p className="fine-print">
-            This is practice. It does not predict real-world survival.
+            Esto es práctica. No garantiza que en un sismo de verdad vayan a estar a salvo.
           </p>
           <div className="actions">
             <button type="button" className="primary" onClick={retry}>
-              Make another COORDINATE decision
+              Decidir otra vez
             </button>
             <button type="button" className="secondary" onClick={onLeave}>
-              Back to family plan
+              Volver al plan de la familia
             </button>
           </div>
         </div>
       ) : (
-        <div className="choice-list" role="group" aria-label="COORDINATE decision options">
+        <div className="choice-list" role="group" aria-label="Opciones cuando la familia está separada">
           {COORDINATE_CHOICES.map((choice) => (
             <button
               key={choice.id}

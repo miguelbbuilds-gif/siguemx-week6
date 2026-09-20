@@ -11,7 +11,7 @@ export function NightHomeScene() {
         <div className="night-bed" />
         <div className="night-door" />
       </div>
-      <p className="night-caption">Night · lights flickering · practice scene</p>
+      <p className="night-caption">Noche · luces parpadeando · escena de práctica</p>
     </div>
   )
 }

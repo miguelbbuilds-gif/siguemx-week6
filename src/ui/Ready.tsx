@@ -24,10 +24,10 @@ export function Ready({
 }: ReadyProps) {
   return (
     <section className="ready">
-      <h1>Family plan saved</h1>
+      <h1>Plan de la familia listo</h1>
       <p className="lead">
-        ACT, COORDINATE, and ADAPT are ready. ADAPT tests what happens when the
-        saved meeting point cannot be used.
+        Siguen tres prácticas: decidir en el momento, decidir cuando están separados,
+        y decidir cuando el punto de reunión no se puede usar.
       </p>
       <IntensityNote compact />
       <ul className="plan-list">
@@ -40,34 +40,35 @@ export function Ready({
           </li>
         ))}
         <li>
-          <strong>Meeting point</strong>
+          <strong>Punto de reunión</strong>
           <span>{family.meetingPoint}</span>
         </li>
       </ul>
       <div className="actions">
         <button type="button" className="primary" onClick={onStartAct}>
-          Start ACT rehearsal
+          Empezar: decidir ahora
         </button>
         <button type="button" className="secondary" onClick={onStartCoordinate}>
-          Start COORDINATE rehearsal
+          Empezar: familia separada
         </button>
         <button type="button" className="secondary" onClick={onStartAdapt}>
-          Start ADAPT rehearsal
+          Empezar: el plan no se puede usar
         </button>
         {allModesDone ? (
           <button type="button" className="primary" onClick={onReviewLoop}>
-            Review one finding
+            Ver un hallazgo
           </button>
         ) : (
           <p className="fine-print">
-            Complete ACT, COORDINATE, and ADAPT once to open the adaptive repeat loop.
+            Completa las tres prácticas una vez para ver un hallazgo y practicar otra vez
+            con un cambio.
           </p>
         )}
         <button type="button" className="text-link" onClick={onEdit}>
-          Edit responsibilities
+          Cambiar qué hace cada quien
         </button>
         <button type="button" className="text-link" onClick={onHome}>
-          Back to welcome
+          Volver al inicio
         </button>
       </div>
     </section>

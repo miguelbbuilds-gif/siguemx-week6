@@ -18,7 +18,7 @@ export function AdaptRehearsal({ family, paused, onLeave, onRecord }: AdaptRehea
   const pauseStartedAt = useRef<number | null>(null)
   const [record, setRecord] = useState<AdaptRecord | null>(null)
   const [round, setRound] = useState(0)
-  const meetingPoint = family.meetingPoint.trim() || 'the original meeting point'
+  const meetingPoint = family.meetingPoint.trim() || 'el punto de reunión de siempre'
 
   useLayoutEffect(() => {
     if (record) return
@@ -65,7 +65,7 @@ export function AdaptRehearsal({ family, paused, onLeave, onRecord }: AdaptRehea
       <p className="kicker">{ADAPT_SCENARIO.title}</p>
       <BlockedMeetingScene meetingPoint={meetingPoint} />
       <p className="lead">
-        Original meeting plan: meet at <strong>{meetingPoint}</strong>.{' '}
+        Plan original: verse en <strong>{meetingPoint}</strong>.{' '}
         {ADAPT_SCENARIO.blockedReason}
       </p>
       <p className="prompt">{ADAPT_SCENARIO.prompt}</p>
@@ -73,33 +73,34 @@ export function AdaptRehearsal({ family, paused, onLeave, onRecord }: AdaptRehea
 
       {record ? (
         <div className="finding" data-testid="adapt-finding">
-          <h2>One behavioral finding</h2>
+          <h2>Un hallazgo de esta decisión</h2>
           <p>{record.finding}</p>
           <p className="fine-print" data-testid="adapt-response-time">
-            Decision: {record.label} · Response time: {formatResponseTime(record.responseMs)}
+            Decisión: {record.label} · Tiempo de respuesta: {formatResponseTime(record.responseMs)}
           </p>
           <p className="fine-print" data-testid="adapt-alternative">
-            Chose a workable alternative: {record.choosesWorkableAlternative ? 'yes' : 'no'} ·
-            Repeated the failed meeting point: {record.repeatsFailedPlan ? 'yes' : 'no'}
+            Elegiste un lugar que sí se puede usar:{' '}
+            {record.choosesWorkableAlternative ? 'sí' : 'no'} · Volviste al punto que ya no
+            sirve: {record.repeatsFailedPlan ? 'sí' : 'no'}
           </p>
           <p className="fine-print">
-            Compared with saved meeting point: {meetingPoint}. Matched original meeting plan:{' '}
-            {record.matchesOriginalMeetingPlan ? 'yes' : 'no'}.
+            Comparado con el punto guardado: {meetingPoint}. Coincide con el plan original:{' '}
+            {record.matchesOriginalMeetingPlan ? 'sí' : 'no'}.
           </p>
           <p className="fine-print">
-            This is practice. It does not predict real-world survival.
+            Esto es práctica. No garantiza que en un sismo de verdad vayan a estar a salvo.
           </p>
           <div className="actions">
             <button type="button" className="primary" onClick={retry}>
-              Make another ADAPT decision
+              Decidir otra vez
             </button>
             <button type="button" className="secondary" onClick={onLeave}>
-              Back to family plan
+              Volver al plan de la familia
             </button>
           </div>
         </div>
       ) : (
-        <div className="choice-list" role="group" aria-label="ADAPT decision options">
+        <div className="choice-list" role="group" aria-label="Opciones cuando el punto de reunión no se puede usar">
           {ADAPT_CHOICES.map((choice) => (
             <button
               key={choice.id}

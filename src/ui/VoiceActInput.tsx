@@ -9,7 +9,9 @@ type VoiceActInputProps = {
 
 export function VoiceActInput({ disabled, onConfirm }: VoiceActInputProps) {
   const [supported] = useState(() => speechSupported())
-  const [status, setStatus] = useState('Tap a choice, or speak one if your browser allows.')
+  const [status, setStatus] = useState(
+    'Toca una opción, o dilo en voz alta si tu celular lo permite.',
+  )
   const [heard, setHeard] = useState('')
   const [match, setMatch] = useState<ActChoice | null>(null)
   const [listening, setListening] = useState(false)
@@ -32,31 +34,31 @@ export function VoiceActInput({ disabled, onConfirm }: VoiceActInputProps) {
     if (disabled) return
     const recognition = createSpeechRecognizer()
     if (!recognition) {
-      setStatus('Voice is not available in this browser. Tap a choice instead.')
+      setStatus('La voz no está disponible aquí. Toca una opción.')
       return
     }
     recRef.current = recognition
     setListening(true)
     setHeard('')
     setMatch(null)
-    setStatus('Listening… say Elena, wait for Mariana, or move yourself.')
+    setStatus('Escuchando… di Elena, espera a Mariana, o muévete tú.')
     recognition.onresult = (event) => {
       const transcript = event.results[0]?.[0]?.transcript ?? ''
       setHeard(transcript)
       setMatch(matchActSpeech(transcript))
       setStatus(
         matchActSpeech(transcript)
-          ? 'Confirm the matched decision, or tap a different one.'
-          : 'We could not match that. Tap a choice or try speaking again.',
+          ? 'Confirma la decisión, o toca otra.'
+          : 'No entendimos eso. Toca una opción o vuelve a hablar.',
       )
     }
     recognition.onerror = (event) => {
       setListening(false)
       if (event.error === 'not-allowed') {
-        setStatus('Microphone permission was denied. Tap a choice instead.')
+        setStatus('No se permitió el micrófono. Toca una opción.')
         return
       }
-      setStatus('Voice did not work this time. Tap a choice or try again.')
+      setStatus('La voz no funcionó esta vez. Toca una opción o inténtalo de nuevo.')
     }
     recognition.onend = () => {
       setListening(false)
@@ -65,14 +67,15 @@ export function VoiceActInput({ disabled, onConfirm }: VoiceActInputProps) {
       recognition.start()
     } catch {
       setListening(false)
-      setStatus('Voice did not start. Tap a choice instead.')
+      setStatus('La voz no arrancó. Toca una opción.')
     }
   }
 
   if (!supported) {
     return (
       <p className="fine-print" data-testid="voice-fallback">
-        Voice is not available here. Tap one of the three choices. Voice is never required.
+        La voz no está disponible aquí. Toca una de las tres opciones. Hablar nunca es
+        obligatorio.
       </p>
     )
   }
@@ -86,14 +89,14 @@ export function VoiceActInput({ disabled, onConfirm }: VoiceActInputProps) {
         disabled={disabled || listening}
         onClick={listen}
       >
-        {listening ? 'Listening…' : 'Speak your decision'}
+        {listening ? 'Escuchando…' : 'Decirlo en voz alta'}
       </button>
       <p className="fine-print">{status}</p>
-      {heard ? <p className="fine-print">Heard: “{heard}”</p> : null}
+      {heard ? <p className="fine-print">Se escuchó: “{heard}”</p> : null}
       {match ? (
         <div className="voice-confirm">
           <p>
-            Matched: <strong>{match.label}</strong>
+            Coincidió con: <strong>{match.label}</strong>
           </p>
           <button
             type="button"
@@ -102,7 +105,7 @@ export function VoiceActInput({ disabled, onConfirm }: VoiceActInputProps) {
             disabled={disabled}
             onClick={() => onConfirm(match)}
           >
-            Confirm this decision
+            Confirmar esta decisión
           </button>
         </div>
       ) : null}

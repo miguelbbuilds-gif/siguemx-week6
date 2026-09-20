@@ -31,7 +31,7 @@ export function createSpeechRecognizer(): SpeechRecognitionLike | null {
   const Ctor = view.SpeechRecognition || view.webkitSpeechRecognition
   if (!Ctor) return null
   const recognition = new Ctor()
-  recognition.lang = 'en-US'
+  recognition.lang = 'es-MX'
   recognition.interimResults = false
   recognition.maxAlternatives = 1
   recognition.continuous = false
@@ -42,9 +42,16 @@ export function matchActSpeech(transcript: string, choices: ActChoice[] = ACT_CH
   const text = transcript.toLowerCase()
   const byId = (id: ActChoice['id']) => choices.find((choice) => choice.id === id) ?? null
 
-  const mentionsElena = /\belena\b|grandmother|help her|go to her|with her/.test(text)
-  const mentionsWait = /\bwait\b|\bmariana\b|coordinator/.test(text)
-  const mentionsSelf = /\bmyself\b|safer place|move now|go now|leave first/.test(text)
+  const mentionsElena =
+    /\belena\b|abuela|ayudarla|ir con ella|con ella|ir a ella|grandmother|help her|go to her|with her/.test(
+      text,
+    )
+  const mentionsWait =
+    /\besperar\b|\bespera\b|\bmariana\b|organiza|coordinator|\bwait\b/.test(text)
+  const mentionsSelf =
+    /\byo\b|moverme|muévete|muevete|ahora yo|primero yo|lugar más seguro|safer place|myself|move now|go now|leave first/.test(
+      text,
+    )
 
   if (mentionsElena && !mentionsWait) return byId('help-elena')
   if (mentionsWait && !mentionsElena) return byId('wait-mariana')

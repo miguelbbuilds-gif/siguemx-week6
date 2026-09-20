@@ -16,10 +16,10 @@ function assert(name: string, ok: boolean) {
   if (!ok) console.error('FAIL', name)
 }
 
-const elena = matchActSpeech('Go to Elena now')
-const wait = matchActSpeech('Wait for Mariana')
-const self = matchActSpeech('Move myself to a safer place')
-const miss = matchActSpeech('hello there')
+const elena = matchActSpeech('Ir con Elena ahora')
+const wait = matchActSpeech('Espera a Mariana')
+const self = matchActSpeech('Muévete tú a un lugar más seguro')
+const miss = matchActSpeech('hola qué tal')
 
 assert('voice maps Elena', elena?.id === 'help-elena')
 assert('voice maps wait', wait?.id === 'wait-mariana')
@@ -91,17 +91,17 @@ assert(
 assert(
   'ready screen does not say rehearsals not started',
   progressNote({ screen: 'ready', currentMode: null, recordedModes: [] }) ===
-    'Family plan · no decisions yet',
+    'Plan de la familia · aún no decides',
 )
 assert(
   'recorded ACT is visible in the header',
   progressNote({ screen: 'ready', currentMode: null, recordedModes: ['ACT'] }) ===
-    'Family plan · recorded: ACT',
+    'Plan de la familia · ya hiciste: Decidir',
 )
 assert(
   'welcome with no records still says not started',
   progressNote({ screen: 'welcome', currentMode: null, recordedModes: [] }) ===
-    'Family setup · rehearsals not started',
+    'Aún no empieza la práctica',
 )
 
 const failed = checks.filter((item) => !item.ok)

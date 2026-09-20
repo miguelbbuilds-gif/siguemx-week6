@@ -16,12 +16,12 @@ export function measureResponseMs(startedAt: number, decidedAt: number, pausedMs
 
 export function findingForActChoice(choice: ActChoice): string {
   if (choice.assumesElenaWithoutPrompt) {
-    return 'You went to Elena without being told to. That is assuming responsibility without prompting.'
+    return 'Fuiste con Elena aunque nadie te lo pidió. Eso es hacerse cargo sin que te lo indiquen.'
   }
   if (choice.id === 'wait-mariana') {
-    return 'You waited for the usual coordinator before acting. Elena was not included in that first decision.'
+    return 'Esperaste a quien normalmente organiza antes de actuar. Elena no quedó en ese primer paso.'
   }
-  return 'You moved yourself first. Elena was not included in that first decision.'
+  return 'Primero te moviste tú. Elena no quedó en ese primer paso.'
 }
 
 export function recordActDecision(
@@ -49,13 +49,16 @@ export function readPlanSignals(plan: FamilyPlan): PlanSignals {
   const all = plan.members.map((member) => member.responsibility.toLowerCase()).join(' ')
 
   return {
-    waitsForMariana: /wait(?:ing)? for mariana|until mariana|reach mariana first|call mariana first/.test(
-      all,
-    ),
-    diegoHelpsElena: /\belena\b/.test(diego) && /help|assist|stay with|check/.test(diego),
+    waitsForMariana:
+      /wait(?:ing)? for mariana|until mariana|reach mariana first|call mariana first|esperar a mariana|hasta que mariana|hablar primero con mariana/.test(
+        all,
+      ),
+    diegoHelpsElena:
+      /\belena\b/.test(diego) && /help|assist|stay with|check|ayudar|revisar|quedarse con/.test(diego),
     diegoActsIfMarianaAbsent:
-      /do not wait|don't wait|if mariana is not|without mariana|not wait only/.test(diego) ||
-      /do not wait|don't wait/.test(all),
+      /do not wait|don't wait|if mariana is not|without mariana|not wait only|no esperar|sin esperar|si mariana no|sin mariana|no esperar solo/.test(
+        diego,
+      ) || /do not wait|don't wait|no esperar|sin esperar/.test(all),
   }
 }
 
@@ -77,25 +80,25 @@ export function findingForCoordinate(choice: CoordinateChoice, plan: FamilyPlan)
 
   if (choice.id === 'wait-mariana') {
     if (matchesPlan) {
-      return 'This follows a plan that waits for Mariana. COORDINATE is the moment she cannot be reached, so the family still has no independent first step.'
+      return 'Esto sigue un plan que espera a Mariana. En esta práctica no se le puede hablar, así que la familia sigue sin un primer paso propio.'
     }
     if (signals.diegoActsIfMarianaAbsent) {
-      return 'The saved plan said not to wait only for Mariana. This decision still relies on the coordinator while she is unreachable.'
+      return 'El plan escrito decía no esperar solo a Mariana. Esta decisión todavía depende de ella, y ahora no se le puede hablar.'
     }
-    return 'You waited for Mariana. The family is separated and she cannot coordinate right now.'
+    return 'Esperaste a Mariana. La familia está separada y ella no puede organizar en este momento.'
   }
 
   if (choice.id === 'follow-plan') {
     if (matchesPlan) {
-      return 'You used the saved plan without waiting for Mariana. That is independent decision-making while the coordinator is unreachable.'
+      return 'Usaste el plan guardado sin esperar a Mariana. Eso es decidir sin quien normalmente organiza, cuando no se le puede hablar.'
     }
-    return 'You chose not to wait for Mariana, but that does not match the written family responsibilities.'
+    return 'Elegiste no esperar a Mariana, pero eso no coincide con lo que está escrito en el plan de la familia.'
   }
 
   if (matchesPlan) {
-    return 'Diego helping Elena matches the saved plan. This rehearsal still notes that he is at school, not already with her.'
+    return 'Que Diego ayude a Elena sí coincide con el plan. Esta práctica recuerda que él está en la escuela, no junto a ella.'
   }
-  return 'This does not wait for Mariana, but it does not match the written family plan.'
+  return 'Esto no espera a Mariana, pero no coincide con el plan escrito de la familia.'
 }
 
 export function recordCoordinateDecision(
@@ -123,15 +126,15 @@ export function adaptMatchesOriginalMeetingPlan(
 }
 
 export function findingForAdapt(choice: AdaptChoice, plan: FamilyPlan): string {
-  const place = plan.meetingPoint.trim() || 'the original meeting point'
+  const place = plan.meetingPoint.trim() || 'el punto de reunión de siempre'
 
   if (choice.id === 'keep-meeting-point') {
-    return `The saved plan still names ${place}. That place is unavailable in this rehearsal. Continuing there repeats the failed plan instead of adapting.`
+    return `El plan guardado sigue nombrando ${place}. En esta práctica ese lugar no se puede usar. Ir allá otra vez es repetir un plan que ya falló, en vez de cambiar.`
   }
   if (choice.id === 'wait-instructions') {
-    return `You waited for new instructions instead of choosing another place. ${place} already failed, and Mariana is not required for a new first step.`
+    return `Esperaste indicaciones nuevas en vez de elegir otro lugar. ${place} ya no sirve, y no hace falta Mariana para dar un primer paso.`
   }
-  return `You chose a workable alternative instead of continuing to ${place}. That is adapting the shared meeting plan.`
+  return `Elegiste un lugar que sí se puede usar, en vez de seguir yendo a ${place}. Eso es cambiar el plan de reunión.`
 }
 
 export function recordAdaptDecision(

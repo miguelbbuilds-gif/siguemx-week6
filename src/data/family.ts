@@ -1,30 +1,30 @@
 import type { FamilyPlan } from '../domain/types.ts'
 
-/** Synthetic household. Invented for demonstration only. Not real people. */
+/** Familia inventada. Solo para practicar. No son personas reales. */
 export const DEFAULT_FAMILY: FamilyPlan = {
-  meetingPoint: 'the neighborhood plaza',
+  meetingPoint: 'la plaza del barrio',
   backupMeetingPoint: '',
   members: [
     {
       id: 'mariana',
       name: 'Mariana',
       age: 46,
-      role: 'Mother and family coordinator',
-      responsibility: 'Coordinate the family and help Elena reach a safe open area.',
+      role: 'Mamá. Persona que normalmente organiza a la familia',
+      responsibility: 'Organizar a la familia y ayudar a Elena a llegar a un lugar abierto y seguro.',
     },
     {
       id: 'elena',
       name: 'Elena',
       age: 72,
-      role: 'Grandmother who may need assistance',
-      responsibility: 'Stay with someone and move to the agreed meeting point when helped.',
+      role: 'Abuela. Puede necesitar ayuda',
+      responsibility: 'Quedarse con alguien y, cuando la ayuden, ir al punto de reunión.',
     },
     {
       id: 'diego',
       name: 'Diego',
       age: 15,
-      role: 'Son',
-      responsibility: 'Help Elena if Mariana is not there. Do not wait only for Mariana.',
+      role: 'Hijo',
+      responsibility: 'Ayudar a Elena si Mariana no está. No esperar solo a Mariana.',
     },
   ],
 }

@@ -1,27 +1,27 @@
 import type { AdaptChoice } from '../domain/types.ts'
 
 export const ADAPT_SCENARIO = {
-  title: 'ADAPT — Meeting point unavailable',
-  prompt: 'The original meeting point cannot be used. What should this family do first?',
-  blockedReason: 'That place is blocked. It is not a usable meeting point in this rehearsal.',
+  title: 'Otro plan — El punto de reunión no se puede usar',
+  prompt: 'El punto de reunión de siempre no se puede usar. ¿Qué debería hacer primero esta familia?',
+  blockedReason: 'Ese lugar está cerrado. En esta práctica no sirve como punto de reunión.',
 } as const
 
 export const ADAPT_CHOICES: AdaptChoice[] = [
   {
     id: 'keep-meeting-point',
-    label: 'Keep going to the original meeting point anyway.',
+    label: 'Ir igual al punto de reunión de siempre.',
     repeatsFailedPlan: true,
     waitsForInstructions: false,
   },
   {
     id: 'wait-instructions',
-    label: 'Wait for Mariana to say where to go next.',
+    label: 'Esperar a que Mariana diga a dónde ir.',
     repeatsFailedPlan: false,
     waitsForInstructions: true,
   },
   {
     id: 'choose-alternative',
-    label: 'Pick a nearby open place and treat that as the new meeting point.',
+    label: 'Elegir un lugar cercano y abierto y usarlo como nuevo punto de reunión.',
     repeatsFailedPlan: false,
     waitsForInstructions: false,
   },
