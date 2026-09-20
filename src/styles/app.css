@@ -413,6 +413,70 @@ textarea[aria-invalid='true'] {
   background: #eef3f8;
 }
 
+.adapt-scene {
+  position: relative;
+  height: 9.2rem;
+  margin: 0 0 0.9rem;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  background: #d7e3dc;
+}
+
+.adapt-street {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.6rem;
+  height: 1.1rem;
+  background: #9aa7a1;
+}
+
+.adapt-plaza {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 7.2rem;
+  padding: 0.55rem 0.6rem 0.45rem;
+  border-radius: 0.7rem;
+  background: #c5d0c4;
+  text-align: center;
+}
+
+.adapt-plaza p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.adapt-plaza.is-blocked {
+  background: #e8d6d4;
+  color: #7a2e2e;
+}
+
+.adapt-x {
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.adapt-tag {
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+}
+
+.adapt-alt {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 2.4rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.55rem;
+  background: #e7f3ee;
+  color: var(--teal-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 .night-scene {
   position: relative;
   overflow: hidden;

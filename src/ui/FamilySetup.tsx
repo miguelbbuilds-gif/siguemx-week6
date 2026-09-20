@@ -17,10 +17,15 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
 
   function updateResponsibility(id: MemberId, responsibility: string) {
     setDraft((current) => ({
+      ...current,
       members: current.members.map((member) =>
         member.id === id ? { ...member, responsibility } : member,
       ),
     }))
+  }
+
+  function updateMeetingPoint(meetingPoint: string) {
+    setDraft((current) => ({ ...current, meetingPoint }))
   }
 
   function handleSave() {
@@ -28,6 +33,7 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
     setErrors(nextErrors)
     if (hasFamilyErrors(nextErrors)) return
     onSave({
+      meetingPoint: draft.meetingPoint.trim(),
       members: draft.members.map((member) => ({
         ...member,
         responsibility: member.responsibility.trim(),
@@ -86,6 +92,24 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
             </fieldset>
           )
         })}
+        <fieldset className="member-card">
+          <legend>Meeting point</legend>
+          <label htmlFor="meeting-point">Where the family agreed to meet</label>
+          <textarea
+            id="meeting-point"
+            name="meeting-point"
+            rows={2}
+            value={draft.meetingPoint}
+            aria-invalid={Boolean(errors.meetingPoint)}
+            aria-describedby={errors.meetingPoint ? 'meeting-point-error' : undefined}
+            onChange={(event) => updateMeetingPoint(event.target.value)}
+          />
+          {errors.meetingPoint ? (
+            <p id="meeting-point-error" className="error" role="alert">
+              {errors.meetingPoint}
+            </p>
+          ) : null}
+        </fieldset>
         <div className="actions">
           <button type="submit" className="primary">
             Save family plan

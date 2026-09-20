@@ -7,6 +7,7 @@ type ReadyProps = {
   onHome: () => void
   onStartAct: () => void
   onStartCoordinate: () => void
+  onStartAdapt: () => void
 }
 
 export function Ready({
@@ -15,13 +16,14 @@ export function Ready({
   onHome,
   onStartAct,
   onStartCoordinate,
+  onStartAdapt,
 }: ReadyProps) {
   return (
     <section className="ready">
       <h1>Family plan saved</h1>
       <p className="lead">
-        ACT is ready. COORDINATE tests the same family when they are separated and
-        Mariana cannot coordinate. ADAPT is not in this milestone.
+        ACT, COORDINATE, and ADAPT are ready. ADAPT tests what happens when the
+        saved meeting point cannot be used.
       </p>
       <IntensityNote compact />
       <ul className="plan-list">
@@ -33,6 +35,10 @@ export function Ready({
             <span>{member.responsibility}</span>
           </li>
         ))}
+        <li>
+          <strong>Meeting point</strong>
+          <span>{family.meetingPoint}</span>
+        </li>
       </ul>
       <div className="actions">
         <button type="button" className="primary" onClick={onStartAct}>
@@ -40,6 +46,9 @@ export function Ready({
         </button>
         <button type="button" className="secondary" onClick={onStartCoordinate}>
           Start COORDINATE rehearsal
+        </button>
+        <button type="button" className="secondary" onClick={onStartAdapt}>
+          Start ADAPT rehearsal
         </button>
         <button type="button" className="text-link" onClick={onEdit}>
           Edit responsibilities

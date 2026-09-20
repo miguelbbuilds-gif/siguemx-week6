@@ -14,9 +14,10 @@ export type FamilyMember = {
 
 export type FamilyPlan = {
   members: FamilyMember[]
+  meetingPoint: string
 }
 
-export type Screen = 'welcome' | 'setup' | 'ready' | 'act' | 'coordinate'
+export type Screen = 'welcome' | 'setup' | 'ready' | 'act' | 'coordinate' | 'adapt'
 
 export type ActChoiceId = 'help-elena' | 'wait-mariana' | 'move-self'
 
@@ -54,5 +55,24 @@ export type CoordinateRecord = {
   responseMs: number
   reliesOnMariana: boolean
   matchesPlan: boolean
+  finding: string
+}
+
+export type AdaptChoiceId = 'keep-meeting-point' | 'wait-instructions' | 'choose-alternative'
+
+export type AdaptChoice = {
+  id: AdaptChoiceId
+  label: string
+  repeatsFailedPlan: boolean
+  waitsForInstructions: boolean
+}
+
+export type AdaptRecord = {
+  choiceId: AdaptChoiceId
+  label: string
+  responseMs: number
+  repeatsFailedPlan: boolean
+  choosesWorkableAlternative: boolean
+  matchesOriginalMeetingPlan: boolean
   finding: string
 }

@@ -2,6 +2,7 @@ import type { FamilyPlan } from '../domain/types.ts'
 
 /** Synthetic household. Invented for demonstration only. Not real people. */
 export const DEFAULT_FAMILY: FamilyPlan = {
+  meetingPoint: 'the neighborhood plaza',
   members: [
     {
       id: 'mariana',

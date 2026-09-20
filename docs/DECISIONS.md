@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: COORDINATE rehearsal implemented. ADAPT, voice, and adaptive logic are still not implemented.
+Scope: ADAPT rehearsal implemented. Voice input, adaptive engine, and repeat loop are still not implemented.
 
 ## Why this folder is a new project
 
@@ -90,12 +90,22 @@ The finding compares the choice with the actual setup text (keyword signals on r
 
 ACT, welcome, STOP, and family setup are unchanged in behavior.
 
+## ADAPT rehearsal — 20 September 2026
+
+ADAPT uses one controlled uncertainty: the saved meeting point is unavailable. The original plan (including the meeting point from family setup, default “the neighborhood plaza”) is shown. Options: keep going to that place, wait for Mariana, or pick a nearby open alternative.
+
+Repeating the blocked meeting point matches the original plan but is not adaptation. Choosing an alternative is a workable change. Waiting for instructions is neither repeating the failed point nor adapting. No preparedness or survival score.
+
+**Tradeoff:** CSS blocked-plaza scene, not Three.js. **Limitation:** ADAPT is a single decision screen; repeating it is the same scenario, not the adaptive engine or modified-repeat loop.
+
+ACT and COORDINATE remain available from the family-plan screen.
+
 ## Remaining work
 
-- ADAPT, voice input, and adaptive logic — not started
-- Mechanical and persona tests — after ADAPT exists
+- Voice input, adaptive engine, and repeat loop — not started
+- Mechanical and persona tests — after those exist
 - Two deployments — not started
 
 ## Next move
 
-After approval, implement ADAPT only (communication fails OR meeting point unavailable).
+After approval, add the constrained adaptive engine so one finding changes the next rehearsal (not a replay).

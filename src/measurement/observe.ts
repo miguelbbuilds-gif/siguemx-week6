@@ -2,6 +2,8 @@ import { memberText } from '../data/coordinateScenario.ts'
 import type {
   ActChoice,
   ActRecord,
+  AdaptChoice,
+  AdaptRecord,
   CoordinateChoice,
   CoordinateRecord,
   FamilyPlan,
@@ -110,5 +112,42 @@ export function recordCoordinateDecision(
     reliesOnMariana: choice.reliesOnMariana,
     matchesPlan: coordinateMatchesPlan(choice, plan),
     finding: findingForCoordinate(choice, plan),
+  }
+}
+
+export function adaptMatchesOriginalMeetingPlan(
+  choice: AdaptChoice,
+  plan: FamilyPlan,
+): boolean {
+  return choice.repeatsFailedPlan && plan.meetingPoint.trim().length > 0
+}
+
+export function findingForAdapt(choice: AdaptChoice, plan: FamilyPlan): string {
+  const place = plan.meetingPoint.trim() || 'the original meeting point'
+
+  if (choice.id === 'keep-meeting-point') {
+    return `The saved plan still names ${place}. That place is unavailable in this rehearsal. Continuing there repeats the failed plan instead of adapting.`
+  }
+  if (choice.id === 'wait-instructions') {
+    return `You waited for new instructions instead of choosing another place. ${place} already failed, and Mariana is not required for a new first step.`
+  }
+  return `You chose a workable alternative instead of continuing to ${place}. That is adapting the shared meeting plan.`
+}
+
+export function recordAdaptDecision(
+  choice: AdaptChoice,
+  plan: FamilyPlan,
+  startedAt: number,
+  decidedAt: number,
+  pausedMs = 0,
+): AdaptRecord {
+  return {
+    choiceId: choice.id,
+    label: choice.label,
+    responseMs: measureResponseMs(startedAt, decidedAt, pausedMs),
+    repeatsFailedPlan: choice.repeatsFailedPlan,
+    choosesWorkableAlternative: choice.id === 'choose-alternative',
+    matchesOriginalMeetingPlan: adaptMatchesOriginalMeetingPlan(choice, plan),
+    finding: findingForAdapt(choice, plan),
   }
 }
