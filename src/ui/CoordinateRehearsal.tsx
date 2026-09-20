@@ -13,12 +13,14 @@ type CoordinateRehearsalProps = {
   family: FamilyPlan
   paused: boolean
   onLeave: () => void
+  onRecord: (record: CoordinateRecord) => void
 }
 
 export function CoordinateRehearsal({
   family,
   paused,
   onLeave,
+  onRecord,
 }: CoordinateRehearsalProps) {
   const startedAt = useRef<number | null>(null)
   const pausedMs = useRef(0)
@@ -48,9 +50,15 @@ export function CoordinateRehearsal({
 
   function choose(choice: CoordinateChoice) {
     if (record || paused || startedAt.current === null) return
-    setRecord(
-      recordCoordinateDecision(choice, family, startedAt.current, Date.now(), pausedMs.current),
+    const next = recordCoordinateDecision(
+      choice,
+      family,
+      startedAt.current,
+      Date.now(),
+      pausedMs.current,
     )
+    setRecord(next)
+    onRecord(next)
   }
 
   function retry() {

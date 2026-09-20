@@ -15,9 +15,19 @@ export type FamilyMember = {
 export type FamilyPlan = {
   members: FamilyMember[]
   meetingPoint: string
+  backupMeetingPoint: string
 }
 
-export type Screen = 'welcome' | 'setup' | 'ready' | 'act' | 'coordinate' | 'adapt'
+export type Screen =
+  | 'welcome'
+  | 'setup'
+  | 'ready'
+  | 'act'
+  | 'coordinate'
+  | 'adapt'
+  | 'loop-finding'
+  | 'loop-repeat'
+  | 'loop-compare'
 
 export type ActChoiceId = 'help-elena' | 'wait-mariana' | 'move-self'
 
@@ -75,4 +85,50 @@ export type AdaptRecord = {
   choosesWorkableAlternative: boolean
   matchesOriginalMeetingPlan: boolean
   finding: string
+}
+
+export type WeaknessId =
+  | 'depends-on-coordinator'
+  | 'repeats-failed-plan'
+  | 'skips-elena'
+  | 'none'
+
+export type VariationId =
+  | 'unreachable-and-blocked'
+  | 'blocked-with-backup'
+  | 'elena-without-coordinator'
+  | 'none'
+
+export type BehaviorObservation = {
+  mode: RehearsalMode
+  attempt: 1 | 2
+  decisionId: string
+  decisionLabel: string
+  responseMs: number
+  responsibilityWithoutPrompting: boolean | null
+  planConsistency: boolean | null
+  adaptation: boolean | null
+  detectedWeakness: WeaknessId
+}
+
+export type RepeatChoiceId = 'wait-mariana' | 'follow-backup' | 'original-point' | 'help-elena'
+
+export type RepeatChoice = {
+  id: RepeatChoiceId
+  label: string
+}
+
+export type RepeatRecord = {
+  choiceId: RepeatChoiceId
+  label: string
+  responseMs: number
+  finding: string
+}
+
+export type AdaptiveResult = {
+  weakness: WeaknessId
+  variation: VariationId
+  finding: string
+  sourceMode: RehearsalMode | null
+  sourceLabel: string
 }

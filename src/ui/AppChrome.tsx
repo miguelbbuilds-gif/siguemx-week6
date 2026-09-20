@@ -3,13 +3,14 @@ import type { RehearsalMode } from '../domain/types.ts'
 
 type AppChromeProps = {
   currentMode?: RehearsalMode | null
+  note?: string
   onStop: () => void
 }
 
-export function AppChrome({ currentMode = null, onStop }: AppChromeProps) {
-  const note = currentMode
-    ? `${currentMode} rehearsal`
-    : 'Family setup · rehearsals not started'
+export function AppChrome({ currentMode = null, note, onStop }: AppChromeProps) {
+  const status =
+    note ??
+    (currentMode ? `${currentMode} rehearsal` : 'Family setup · rehearsals not started')
 
   return (
     <header className="chrome">
@@ -27,7 +28,7 @@ export function AppChrome({ currentMode = null, onStop }: AppChromeProps) {
           STOP
         </button>
       </div>
-      <ol className="progress" aria-label={note}>
+      <ol className="progress" aria-label={status}>
         {REHEARSAL_MODES.map((mode, index) => (
           <li
             key={mode}
@@ -41,7 +42,7 @@ export function AppChrome({ currentMode = null, onStop }: AppChromeProps) {
           </li>
         ))}
       </ol>
-      <p className="progress-note">{note}</p>
+      <p className="progress-note">{status}</p>
     </header>
   )
 }

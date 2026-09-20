@@ -8,6 +8,8 @@ type ReadyProps = {
   onStartAct: () => void
   onStartCoordinate: () => void
   onStartAdapt: () => void
+  allModesDone: boolean
+  onReviewLoop: () => void
 }
 
 export function Ready({
@@ -17,6 +19,8 @@ export function Ready({
   onStartAct,
   onStartCoordinate,
   onStartAdapt,
+  allModesDone,
+  onReviewLoop,
 }: ReadyProps) {
   return (
     <section className="ready">
@@ -50,6 +54,15 @@ export function Ready({
         <button type="button" className="secondary" onClick={onStartAdapt}>
           Start ADAPT rehearsal
         </button>
+        {allModesDone ? (
+          <button type="button" className="primary" onClick={onReviewLoop}>
+            Review one finding
+          </button>
+        ) : (
+          <p className="fine-print">
+            Complete ACT, COORDINATE, and ADAPT once to open the adaptive repeat loop.
+          </p>
+        )}
         <button type="button" className="text-link" onClick={onEdit}>
           Edit responsibilities
         </button>

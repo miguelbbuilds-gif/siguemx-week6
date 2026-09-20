@@ -96,7 +96,7 @@ Observe decision → detect **one** meaningful weakness → select **one** contr
 
 The repeat is **not** a replay of the same scenario. The adaptive engine must alter the next rehearsal so the family faces a different constrained condition tied to the finding (for example: coordinator unavailable, meeting point blocked, or communication failed). Only one finding and one variation at a time.
 
-This rule is specified here. It is **not** implemented in application code yet.
+This rule is implemented as a constrained, deterministic engine: one weakness, one variation, one plan change, then a different second rehearsal. It is not an open-ended generator.
 
 ---
 
@@ -265,7 +265,7 @@ Approved Week 6 image-generated mockup (phone-first ACT rehearsal, visible STOP,
 
 ## 24. Current repo status
 
-Phone-first welcome, synthetic family setup, ACT, COORDINATE, and ADAPT are implemented. Voice input, the adaptive engine, the repeat loop, and a full Three.js scene are not implemented.
+Phone-first welcome, synthetic family setup, ACT, COORDINATE, ADAPT, behavior observation, and one constrained adaptive repeat loop are implemented. Voice input and a full Three.js scene are not implemented.
 
 ---
 

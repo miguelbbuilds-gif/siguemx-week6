@@ -33,7 +33,9 @@ export function FamilySetup({ family, onSave, onBack }: FamilySetupProps) {
     setErrors(nextErrors)
     if (hasFamilyErrors(nextErrors)) return
     onSave({
+      ...draft,
       meetingPoint: draft.meetingPoint.trim(),
+      backupMeetingPoint: (draft.backupMeetingPoint ?? '').trim(),
       members: draft.members.map((member) => ({
         ...member,
         responsibility: member.responsibility.trim(),

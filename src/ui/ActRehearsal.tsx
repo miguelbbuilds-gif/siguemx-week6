@@ -8,9 +8,10 @@ import { NightHomeScene } from './NightHomeScene.tsx'
 type ActRehearsalProps = {
   paused: boolean
   onLeave: () => void
+  onRecord: (record: ActRecord) => void
 }
 
-export function ActRehearsal({ paused, onLeave }: ActRehearsalProps) {
+export function ActRehearsal({ paused, onLeave, onRecord }: ActRehearsalProps) {
   const startedAt = useRef<number | null>(null)
   const pausedMs = useRef(0)
   const pauseStartedAt = useRef<number | null>(null)
@@ -38,7 +39,9 @@ export function ActRehearsal({ paused, onLeave }: ActRehearsalProps) {
 
   function choose(choice: ActChoice) {
     if (record || paused || startedAt.current === null) return
-    setRecord(recordActDecision(choice, startedAt.current, Date.now(), pausedMs.current))
+    const next = recordActDecision(choice, startedAt.current, Date.now(), pausedMs.current)
+    setRecord(next)
+    onRecord(next)
   }
 
   function retry() {

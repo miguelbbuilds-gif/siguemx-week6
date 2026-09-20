@@ -9,9 +9,10 @@ type AdaptRehearsalProps = {
   family: FamilyPlan
   paused: boolean
   onLeave: () => void
+  onRecord: (record: AdaptRecord) => void
 }
 
-export function AdaptRehearsal({ family, paused, onLeave }: AdaptRehearsalProps) {
+export function AdaptRehearsal({ family, paused, onLeave, onRecord }: AdaptRehearsalProps) {
   const startedAt = useRef<number | null>(null)
   const pausedMs = useRef(0)
   const pauseStartedAt = useRef<number | null>(null)
@@ -40,9 +41,15 @@ export function AdaptRehearsal({ family, paused, onLeave }: AdaptRehearsalProps)
 
   function choose(choice: AdaptChoice) {
     if (record || paused || startedAt.current === null) return
-    setRecord(
-      recordAdaptDecision(choice, family, startedAt.current, Date.now(), pausedMs.current),
+    const next = recordAdaptDecision(
+      choice,
+      family,
+      startedAt.current,
+      Date.now(),
+      pausedMs.current,
     )
+    setRecord(next)
+    onRecord(next)
   }
 
   function retry() {

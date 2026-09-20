@@ -1,7 +1,7 @@
 # Decisions of SigueMX (Week 6)
 
 Date: 20 September 2026  
-Scope: ADAPT rehearsal implemented. Voice input, adaptive engine, and repeat loop are still not implemented.
+Scope: Adaptive behavior loop implemented. Voice input is still not implemented.
 
 ## Why this folder is a new project
 
@@ -100,12 +100,31 @@ Repeating the blocked meeting point matches the original plan but is not adaptat
 
 ACT and COORDINATE remain available from the family-plan screen.
 
+## Adaptive loop — 20 September 2026
+
+After ACT, COORDINATE, and ADAPT each have one recorded decision, the engine reads those records and picks **one** weakness in this order:
+
+1. `depends-on-coordinator` (waited for Mariana in any mode, including ADAPT “wait for instructions”)
+2. `repeats-failed-plan` (kept going to the blocked meeting point)
+3. `skips-elena` (ACT moved self first)
+
+Mapped variations:
+
+- coordinator → Mariana unreachable **and** original meeting point blocked
+- failed plan → meeting point still blocked, backup place required
+- skips Elena → Mariana unreachable, Elena still needs a first step
+
+The user must change Diego’s written responsibility before **Rehearse again**. The second scenario is not a replay. Comparison uses the actual first and second decision labels, with response times. No preparedness or survival score.
+
+**Limitations:** Keyword/choice-id rules only; three variations only; session memory (no Supabase); English plan-change text; repeating the original three modes still works independently.
+
+Voice input is still not implemented.
+
 ## Remaining work
 
-- Voice input, adaptive engine, and repeat loop — not started
-- Mechanical and persona tests — after those exist
-- Two deployments — not started
+- Voice input — not started
+- Mechanical and persona tests, two deployments — still required
 
 ## Next move
 
-After approval, add the constrained adaptive engine so one finding changes the next rehearsal (not a replay).
+After approval, optional browser voice input that writes structured decision data, or first deployment.
